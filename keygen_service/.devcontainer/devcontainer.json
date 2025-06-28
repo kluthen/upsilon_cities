@@ -1,0 +1,24 @@
+{
+    "name": "Go Keygen Service Dev Container",
+    "dockerComposeFile": [
+        "../../infra/docker-compose.dev.yml"
+    ],
+    "service": "keygen_service",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "go.useLanguageServer": true,
+                "go.formatTool": "gofmt",
+                "go.lintTool": "golint"
+            },
+            "extensions": [
+                "golang.Go"
+            ]
+        }
+    },
+    "forwardPorts": [
+        9000
+    ],
+    "remoteUser": "vscode",
+    "postCreateCommand": "go mod download"
+}

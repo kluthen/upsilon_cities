@@ -1,0 +1,72 @@
+version: "3.8"
+name: "upsilon_cities_dev"
+networks:
+  upsilon-network:
+    name: "upsilon_cities_support_upsilon-network"
+    external: true
+
+services:
+  backend_admin:
+    build:
+      context: ../backend_admin
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ../backend_admin:/workspace:cached
+    security_opt:
+      - seccomp:unconfined
+    command: sleep infinity
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: postgres_admin
+      DB_PORT: 5532
+      DB_DATABASE: admin_db
+      DB_USERNAME: admin
+      DB_PASSWORD: adminpass
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+  city_engine:
+    build:
+      context: ../city_engine
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ../city_engine:/workspace:cached
+    security_opt:
+      - seccomp:unconfined
+    command: sleep infinity
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_city:5533/city_db
+      SPRING_DATASOURCE_USERNAME: city
+      SPRING_DATASOURCE_PASSWORD: citypass
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+  keygen_service:
+    build:
+      context: ../keygen_service
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ../keygen_service:/workspace:cached
+    security_opt:
+      - seccomp:unconfined
+    command: sleep infinity
+    ports:
+      - "7000:7000"
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ../frontend:/workspace:cached
+    security_opt:
+      - seccomp:unconfined
+    command: sleep infinity
+    ports:
+      - "5173:5173"

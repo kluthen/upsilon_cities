@@ -1,0 +1,21 @@
+{
+  "name": "UpsilonCities Backend Admin",
+  "dockerComposeFile": [
+    "../../infra/docker-compose.dev.yml"
+  ],
+  "service": "backend_admin",
+  "workspaceFolder": "/var/www/html",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "bmewburn.vscode-intelephense-client",
+        "onecentlin.laravel-blade"
+      ],
+      "settings": {
+        "php.validate.executablePath": "/usr/local/bin/php"
+      }
+    }
+  },
+  "postCreateCommand": "composer install && php artisan migrate"
+}

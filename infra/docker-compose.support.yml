@@ -1,0 +1,52 @@
+version: "3.8"
+
+name: "upsilon_cities_support"
+networks:
+  upsilon-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.host_binding_ipv4: "127.0.0.1"
+
+services:
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - upsilon-network
+
+  postgres_admin:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: admin_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpass
+    ports:
+      - "5532:5432"
+    volumes:
+      - pg_admin_data:/var/lib/postgresql/data
+    networks:
+      - upsilon-network
+
+  postgres_city:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: city_db
+      POSTGRES_USER: city
+      POSTGRES_PASSWORD: citypass
+    ports:
+      - "5533:5432"  # attention port local différent pour éviter conflit avec postgres_admin
+    volumes:
+      - pg_city_data:/var/lib/postgresql/data
+    networks:
+      - upsilon-network
+
+volumes:
+  redis_data:
+  pg_admin_data:
+  pg_city_data:

@@ -1,0 +1,82 @@
+version: '3.8'
+
+name: "upsilon_cities"
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=development
+
+  backend_admin:
+    build:
+      context: ./backend_admin
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend_admin:/var/www
+    environment:
+      - DB_HOST=postgres_admin
+      - DB_DATABASE=admin_db
+      - DB_USERNAME=admin
+      - DB_PASSWORD=adminpass
+    depends_on:
+      - postgres_admin
+
+  city_engine:
+    build:
+      context: ./city_engine
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./city_engine:/app
+    environment:
+      - DB_HOST=postgres_city
+      - DB_DATABASE=city_db
+      - DB_USERNAME=city
+      - DB_PASSWORD=citypass
+      - REDIS_HOST=redis
+    depends_on:
+      - postgres_city
+      - redis
+
+  keygen_service:
+    build:
+      context: ./keygen_service
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./keygen_service:/app
+    environment:
+      - REDIS_HOST=redis
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  postgres_admin:
+    image: postgres:16
+    environment:
+      - POSTGRES_DB=admin_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=adminpass
+    volumes:
+      - pgdata_admin:/var/lib/postgresql/data
+
+  postgres_city:
+    image: postgres:16
+    environment:
+      - POSTGRES_DB=city_db
+      - POSTGRES_USER=city
+      - POSTGRES_PASSWORD=citypass
+    volumes:
+      - pgdata_city:/var/lib/postgresql/data
+
+volumes:
+  pgdata_admin:
+  pgdata_city:

@@ -1,0 +1,8 @@
+{
+    "name": "Frontend UpsilonCities",
+    "dockerComposeFile": [
+        "../../infra/docker-compose.dev.yml"
+    ],
+    "service": "frontend",
+    "workspaceFolder": "/workspace"
+}

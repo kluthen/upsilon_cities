@@ -1,0 +1,29 @@
+{
+    "name": "City Engine - Spring Boot Dev Container",
+    "dockerComposeFile": [
+        "../../infra/docker-compose.dev.yml"
+    ],
+    "service": "city_engine",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "java.configuration.runtimes": [
+                    {
+                        "name": "JavaSE-17",
+                        "path": "/usr/lib/jvm/java-17-openjdk"
+                    }
+                ]
+            },
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "redhat.vscode-xml",
+                "batisteo.vscode-database"
+            ]
+        }
+    },
+    "forwardPorts": [
+        8080
+    ],
+    "remoteUser": "vscode",
+    "postCreateCommand": "./mvnw clean install -DskipTests"
+}
