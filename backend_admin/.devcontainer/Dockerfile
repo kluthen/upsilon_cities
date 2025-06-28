@@ -11,7 +11,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Ajouter un utilisateur non-root (optionnel)
+EXPOSE 8000
+
 RUN groupadd -g 1000 www && useradd -u 1000 -ms /bin/bash -g www www
 
 # Droits pour VS Code

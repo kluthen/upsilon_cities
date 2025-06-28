@@ -11,12 +11,12 @@ services:
       context: ../backend_admin
       dockerfile: .devcontainer/Dockerfile
     volumes:
-      - ../backend_admin:/workspace:cached
+      - ../backend_admin:/var/www/html:cached
     security_opt:
       - seccomp:unconfined
     command: sleep infinity
     ports:
-      - "8000:8000"
+      - "8100:8000"
     environment:
       DB_HOST: postgres_admin
       DB_PORT: 5532

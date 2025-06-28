@@ -4,5 +4,6 @@
         "../../infra/docker-compose.dev.yml"
     ],
     "service": "frontend",
-    "workspaceFolder": "/workspace"
+    "workspaceFolder": "/workspace",
+    "shutdownAction": "none"
 }
