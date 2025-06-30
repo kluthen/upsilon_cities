@@ -4,6 +4,7 @@
         "../../infra/docker-compose.dev.yml"
     ],
     "service": "keygen_service",
+    "workspaceFolder": "/workspace",
     "customizations": {
         "vscode": {
             "settings": {
@@ -20,5 +21,5 @@
         9000
     ],
     "remoteUser": "vscode",
-    "postCreateCommand": "go mod download"
+    "shutdownAction": "none"
 }

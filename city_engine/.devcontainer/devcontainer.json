@@ -4,26 +4,24 @@
         "../../infra/docker-compose.dev.yml"
     ],
     "service": "city_engine",
+    "workspaceFolder": "/workspace",
     "customizations": {
         "vscode": {
             "settings": {
                 "java.configuration.runtimes": [
                     {
-                        "name": "JavaSE-17",
-                        "path": "/usr/lib/jvm/java-17-openjdk"
+                        "name": "JavaSE-24",
+                        "path": "/opt/java/openjdk"
                     }
                 ]
             },
             "extensions": [
-                "vscjava.vscode-java-pack",
-                "redhat.vscode-xml",
-                "batisteo.vscode-database"
+                "vscjava.vscode-java-pack"
             ]
         }
     },
     "forwardPorts": [
         8080
     ],
-    "remoteUser": "vscode",
-    "postCreateCommand": "./mvnw clean install -DskipTests"
+    "shutdownAction": "none"
 }
