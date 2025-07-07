@@ -3,10 +3,11 @@ import lombok.Data;
 
 @Data
 public class Factory {
+    private Long id;
     private String name;
     private int level = 1;
+    private Long userId = Long.valueOf(0);
     private Operation[] operations;
-    private Storage storage = new Storage();
 
     // Create one basic test factory with a basic test operation.
     public static Factory Create() 

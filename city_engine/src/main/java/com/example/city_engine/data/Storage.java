@@ -15,7 +15,7 @@ public class Storage {
         if(usage + item.getCount() > capacity)
             return false; // exceed capacity
         
-        content.compute(item.getName(), (k,v) -> v==null? item : v.updateCount(item.getCount())); 
+        content.compute(item.getName(), (_,v) -> v==null? item : v.updateCount(item.getCount())); 
         usage = usage + item.getCount();
         return true;
     }
@@ -38,7 +38,7 @@ public class Storage {
         if(it.getCount() < item.getCount())
             return false;
         
-        content.compute(item.getName(), (k,v) -> {
+        content.compute(item.getName(), (_,v) -> {
             v= v.updateCount(-item.getCount());
             if(v.getCount() == 0) return null;
             return v;

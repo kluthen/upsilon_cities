@@ -12,6 +12,7 @@ public class Operation {
         Stopped;
     }
 
+    private Long id;
     private String name;
     private ItemStack[] inputs = new ItemStack[]{};
     private ItemStack[] outputs = new ItemStack[]{};

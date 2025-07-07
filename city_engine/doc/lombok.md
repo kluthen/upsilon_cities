@@ -15,3 +15,5 @@ Oddly, this is something that took some time for me to find, whereas it was read
 The simplest way to use it is to annotate the class with **@Data** (don't forget to *import lombok.Data* with **a capital D**)
 
 This will add all getter and setters, a mandatory constructor for final props and clean toString. (See)[https://projectlombok.org/features/Data]
+
+There are many features around, but the documentation is sparse and not very accessible.

@@ -17,7 +17,9 @@
             },
             "extensions": [
                 "vscjava.vscode-java-pack",
-                "Oracle.oracle-java"
+                "Oracle.oracle-java",
+                "vmware.vscode-spring-boot",
+                "bierner.markdown-mermaid"
             ]
         }
     },
