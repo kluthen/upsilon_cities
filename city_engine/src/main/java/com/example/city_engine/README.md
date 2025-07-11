@@ -38,8 +38,8 @@ sequenceDiagram
 See [City Controller](controllers/README.md#City), [Repository](repositories/README.md#City), [Service](services/README.md#City)
 
 Mostly expect routes:
-* GET /cities: Grab all cities(names, mostly) present in memory/db
-* GET /city/{id}: Grab specified city fully, including all factories linked to it, that are viewable by the user. Also, retrieve user's storage in this city.
+* GET /cities: Grab all cities(names, mostly) present in memory/db, where the user is present.
+* GET /cities/{id}: Grab specified city fully, including all factories linked to it, that are viewable by the user. Also, retrieve user's storage in this city.
 
 ### Factory Management
 
@@ -48,8 +48,8 @@ Mostly expect routes:
 See [Factory Controller](controllers/README.md#Factory), [Repository](repositories/README.md#Factory), [Service](services/README.md#Factory)
 
 Mostly expect routes:
-* GET /city/{city_id}/factories: Grab all factories(names, mostly) present in memory/db
-* GET /city/{city_id}/factory/{id}: Grab specified factory fully, including all its operations. 
+* GET /factories: Grab all factories(names, mostly) present in memory/db
+* GET /factories/{id}: Grab specified factory fully, including all its operations. 
 
 ### Operation Management
 
@@ -58,11 +58,11 @@ Mostly expect routes:
 See [Operation Controller](controllers/README.md#Operation), [Repository](repositories/README.md#Operation), [Service](services/README.md#Operation)
 
 Routes:
-* GET /city/{city_id}/factory/{factory_id}/operations: Grab all operations states. 
-* POST /city/{city_id}/factory/{factory_id}/operation/{operation_id}/stop: Stop the operation
-* POST /city/{city_id}/factory/{factory_id}/operation/{operation_id}/start: start the operation
-* POST /city/{city_id}/factory/{factory_id}/operations/stop: Stop all soperation
-* POST /city/{city_id}/factory/{factory_id}/operations/start: start all operations
+* GET /operations: Grab all operations states. 
+* POST /operations/{operation_id}/stop: Stop the operation
+* POST /operations/{operation_id}/start: start the operation
+* POST /operations/stop: Stop all soperation
+* POST /operations/start: start all operations
 
 ### Overall
 

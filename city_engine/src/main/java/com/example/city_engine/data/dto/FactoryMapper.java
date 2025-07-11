@@ -10,10 +10,12 @@ import lombok.EqualsAndHashCode;
 
 public class FactoryMapper {
     
+    static public class FactoryDTO extends DTO{}
+
     @Data
     @EqualsAndHashCode(callSuper=false) 
     @AllArgsConstructor
-    static public class SimpleDTO extends DTO
+    static public class SimpleDTO extends FactoryDTO
     {
         private String name;
         private int level;
@@ -22,7 +24,7 @@ public class FactoryMapper {
     @Data
     @EqualsAndHashCode(callSuper=false) 
     @AllArgsConstructor
-    static public class WithSimplfiedOperationDTO extends DTO
+    static public class WithSimplfiedOperationDTO extends FactoryDTO
     {
         private String name;
         private int level;

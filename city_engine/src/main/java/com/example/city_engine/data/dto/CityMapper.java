@@ -9,10 +9,12 @@ import lombok.EqualsAndHashCode;
 
 public class CityMapper {
 
+    static public class CityDTO extends DTO    {}
+
     @Data 
     @EqualsAndHashCode(callSuper=false)
     @AllArgsConstructor
-    static public class SimpleDTO extends DTO{
+    static public class SimpleDTO extends CityDTO{
         private String name;
         private int level;
         private int size;
@@ -21,7 +23,7 @@ public class CityMapper {
     @Data 
     @EqualsAndHashCode(callSuper=false)
     @AllArgsConstructor
-    static public class WithStorageDTO  extends  DTO{
+    static public class WithStorageDTO  extends  CityDTO{
         private String name;
         private int level;
         private int size;
@@ -30,7 +32,7 @@ public class CityMapper {
     @Data
     @EqualsAndHashCode(callSuper=false) 
     @AllArgsConstructor
-    static public class CompleteForUserDTO  extends  DTO{
+    static public class CompleteForUserDTO  extends  CityDTO{
         private String name;
         private int level;
         private int size;

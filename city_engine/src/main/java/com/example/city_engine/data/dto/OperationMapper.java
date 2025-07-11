@@ -11,10 +11,12 @@ import lombok.EqualsAndHashCode;
 
 public class OperationMapper {
 
+    static public class OperationDTO extends DTO {}
+
     @Data
     @EqualsAndHashCode(callSuper=false) 
     @AllArgsConstructor
-    static public class SimpleDTO extends DTO
+    static public class SimpleDTO extends OperationDTO
     {
         private String name;
         private Operation.Status status ;

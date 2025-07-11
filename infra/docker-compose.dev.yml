@@ -41,15 +41,15 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_city:5533/city_db
       SPRING_DATASOURCE_USERNAME: city
       SPRING_DATASOURCE_PASSWORD: citypass
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
+      JWT_SERVICE: http://jwt_service:7000
 
-  keygen_service:
+
+  jwt_service:
     build:
-      context: ../keygen_service
+      context: ../jwt_service
       dockerfile: .devcontainer/Dockerfile
     volumes:
-      - ../keygen_service:/workspace:cached
+      - ../jwt_service:/workspace:cached
     security_opt:
       - seccomp:unconfined
     command: sleep infinity
