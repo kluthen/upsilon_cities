@@ -1,7 +1,7 @@
 package com.example.city_engine.middleware;
 
-import java.util.Optional;
 import java.time.Duration;
+import java.util.Optional;
 
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -16,8 +16,12 @@ public class JWTService {
     {
         apiAccess = WebClient.create(Optional.ofNullable(System.getenv("JWT_SERVICE")).orElse("http://jwt_service:7000"));
     }
+    public JWTService(String api_url)
+    {
+        apiAccess = WebClient.create(api_url);
+    }
 
-    public record JWTResult(boolean success, Long user_id, String newToken){}
+    public record JWTResult(boolean success, Long userId, String newToken){}
 
     public JWTResult check(String token)
     {

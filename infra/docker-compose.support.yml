@@ -19,7 +19,7 @@ services:
       - upsilon-network
 
   postgres_admin:
-    image: postgres:15-alpine
+    image: postgres:latest
     restart: unless-stopped
     environment:
       POSTGRES_DB: admin_db
@@ -33,7 +33,7 @@ services:
       - upsilon-network
 
   postgres_city:
-    image: postgres:15-alpine
+    image: postgres:latest
     restart: unless-stopped
     environment:
       POSTGRES_DB: city_db

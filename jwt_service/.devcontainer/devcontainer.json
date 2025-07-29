@@ -1,9 +1,9 @@
 {
-    "name": "Go Keygen Service Dev Container",
+    "name": "Go JWT Service Dev Container",
     "dockerComposeFile": [
         "../../infra/docker-compose.dev.yml"
     ],
-    "service": "keygen_service",
+    "service": "jwt_service",
     "workspaceFolder": "/workspace",
     "customizations": {
         "vscode": {
@@ -13,7 +13,8 @@
                 "go.lintTool": "golint"
             },
             "extensions": [
-                "golang.Go"
+                "golang.Go",
+                "bierner.markdown-mermaid"
             ]
         }
     },

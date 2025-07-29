@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.city_engine.data.City;
-import com.example.city_engine.repositories.CityRepository;
 import com.example.city_engine.data.dto.CityMapper.CityDTO;
+import com.example.city_engine.repositories.CityRepository;
 
 @Service
 public class CityService {
@@ -14,6 +14,11 @@ public class CityService {
 
     public City fromDTO(CityDTO d)
     {
-        return repo.fromId(d.getId());
+        return fromId(d.getId());
+    }
+    public City fromId(Long id)
+    {
+        // TODO: implement.
+        return new City();
     }
 }

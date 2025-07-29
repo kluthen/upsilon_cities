@@ -12,8 +12,6 @@ services:
       dockerfile: .devcontainer/Dockerfile
     volumes:
       - ../backend_admin:/var/www/html:cached
-    security_opt:
-      - seccomp:unconfined
     command: sleep infinity
     ports:
       - "8100:8000"
@@ -25,6 +23,8 @@ services:
       DB_PASSWORD: adminpass
       REDIS_HOST: redis
       REDIS_PORT: 6379
+    networks:
+      - upsilon-network
 
   city_engine:
     build:
@@ -32,16 +32,16 @@ services:
       dockerfile: .devcontainer/Dockerfile
     volumes:
       - ../city_engine:/workspace:cached
-    security_opt:
-      - seccomp:unconfined
     command: sleep infinity
     ports:
       - "8200:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_city:5533/city_db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_city:5432/city_db
       SPRING_DATASOURCE_USERNAME: city
       SPRING_DATASOURCE_PASSWORD: citypass
       JWT_SERVICE: http://jwt_service:7000
+    networks:
+      - upsilon-network
 
 
   jwt_service:
@@ -50,14 +50,14 @@ services:
       dockerfile: .devcontainer/Dockerfile
     volumes:
       - ../jwt_service:/workspace:cached
-    security_opt:
-      - seccomp:unconfined
     command: sleep infinity
     ports:
       - "7000:7000"
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
+    networks:
+      - upsilon-network
 
   frontend:
     build:
@@ -65,8 +65,8 @@ services:
       dockerfile: .devcontainer/Dockerfile
     volumes:
       - ../frontend:/workspace:cached
-    security_opt:
-      - seccomp:unconfined
     command: sleep infinity
     ports:
       - "5173:5173"
+    networks:
+      - upsilon-network

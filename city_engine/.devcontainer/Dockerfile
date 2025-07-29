@@ -2,7 +2,8 @@
 FROM maven:3.9.10-eclipse-temurin-24-alpine
 
 # Installer outils utiles
-RUN apk add --no-cache bash curl git
+RUN apk add --no-cache bash curl git redis postgresql-client
+
 
 EXPOSE 8080
 

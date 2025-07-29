@@ -2,11 +2,8 @@ package com.example.city_engine.middleware;
 
 import java.io.IOException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.example.city_engine.util.Error;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -14,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -39,10 +37,14 @@ public class JWTWebFilter implements Filter {
         {
             // add User id to the request.
             var req = (HttpServletRequest) request;
-            req.setAttribute(JWTUser.Attr, jwt.user_id());
+            req.setAttribute(JWTUser.Attr, jwt.userId());
 
             // call next filter or request handler.
             chain.doFilter(request, response);
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            
+            // add cookie to response.
+            httpResponse.addCookie(new Cookie("NewToken", jwt.newToken()));
         } else {
             var err = new Error("Authentication", "Denied", jwt.newToken());
             HttpServletResponse httpResponse = (HttpServletResponse) response;

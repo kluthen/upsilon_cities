@@ -15,6 +15,11 @@ public class FactoryService {
 
     public Factory fromDTO(FactoryDTO d)
     {
-        return repo.fromId(d.getId());
+        return fromId(d.getId());
+    }
+    public Factory fromId(Long id)
+    {
+        // TODO: implement.
+        return new Factory();
     }
 }

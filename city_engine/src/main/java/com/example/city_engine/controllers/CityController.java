@@ -12,7 +12,7 @@ public class CityController {
 
     @GetMapping("/cities")
     public CityMapper.SimpleDTO[] getCities() {
-        
+        return new CityMapper.SimpleDTO[0];
     }
 
     @GetMapping("/cities/{id}")

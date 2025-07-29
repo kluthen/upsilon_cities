@@ -14,6 +14,12 @@ public class OperationService {
 
     public Operation fromDTO(OperationDTO d)
     {
-        return repo.fromId(d.getId());
+        return fromId(d.getId());
+    }
+
+    public Operation fromId(Long id)
+    {
+        // TODO: implement.
+        return new Operation();
     }
 }
