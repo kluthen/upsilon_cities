@@ -11,7 +11,7 @@ RUN go mod download
 COPY . .
 
 # Compiler l'application en mode statique et sans debug
-RUN CGO_ENABLED=0 GOOS=linux go build -o keygen_service ./cmd/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -o jwt_service ./cmd/main.go
 
 # Étape 2 : image finale minimale
 FROM alpine:latest
@@ -22,7 +22,7 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /app
 
 # Copier le binaire compilé depuis le builder
-COPY --from=builder /app/keygen_service .
+COPY --from=builder /app/jwt_service .
 
 # Port d'écoute (adapter selon ton code)
 EXPOSE 9000
@@ -32,4 +32,4 @@ ENV REDIS_HOST=redis
 ENV REDIS_PORT=6379
 
 # Commande de démarrage
-CMD ["./keygen_service"]
+CMD ["./jwt_service"]

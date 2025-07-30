@@ -9,6 +9,15 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
+const listening_port = 7000
+
+func logger(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Println(r.URL.Path)
+		next.ServeHTTP(w, r)
+	})
+}
+
 func main() {
 	// Connexion Redis avec variables d'env
 	rdb = redis.NewClient(&redis.Options{
@@ -25,11 +34,12 @@ func main() {
 
 	r := http.NewServeMux()
 
-	r.HandleFunc("POST /register/{user_id}", generateKeysForUser)
-	r.HandleFunc("GET /check/{key}", getValidateHandler)
+	r.Handle("POST /register/{user_id}", logger(http.HandlerFunc(generateKeysForUser)))
+	r.Handle("GET /check/{key}", logger(http.HandlerFunc(getValidateHandler)))
+	r.HandleFunc("/", rejecterHandler)
 
-	fmt.Println("Server listening on :9000")
-	log.Fatal(http.ListenAndServe(":9000", r))
+	fmt.Printf("Server listening on :%d\r\n", listening_port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", listening_port), r))
 }
 
 // getEnv lit une variable d'environnement ou retourne une valeur par défaut
