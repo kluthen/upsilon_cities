@@ -1,0 +1,24 @@
+version: "3.8"
+name: "upsilon_cities_dev"
+networks:
+  upsilon-network:
+    name: "upsilon_cities_support_upsilon-network"
+    external: true
+
+services:
+  old_city_engine:
+    build:
+      context: ../old_city_engine
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ../old_city_engine:/workspace:cached
+    command: sleep infinity
+    ports:
+      - "8200:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_city:5432/city_db
+      SPRING_DATASOURCE_USERNAME: city
+      SPRING_DATASOURCE_PASSWORD: citypass
+      JWT_SERVICE: http://jwt_service:7000
+    networks:
+      - upsilon-network
